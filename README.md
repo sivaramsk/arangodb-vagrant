@@ -1,5 +1,5 @@
 # arangodb-vagrant
-Setup Arangodb using vagrant in a minute
+Setup Arangodb cluster using vagrant in a minute
 
 1. Checkout the project
 2. Edit the vagrant file with the right interface and correct ip in the below line 
