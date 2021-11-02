@@ -1,0 +1,44 @@
+---
+# tasks file for arangodb download and install
+
+  - name: Delete secrets folder if exists
+    ansible.builtin.file:
+      path: secrets
+      state: absent
+    
+  - name: Create secrets folder 
+    ansible.builtin.file:
+      path: secrets
+      state: directory
+
+  - name: Download and setup Arangodb Server Tar file
+    ansible.builtin.unarchive: 
+      src: "{{ arangodb_download_url }}"
+      dest: /tmp
+      remote_src: yes
+
+  - name: Create ArangoDB JWT Secret
+    command: /tmp/arangodb3e-linux-3.8.1/bin/arangodb create jwt-secret --secret=arangodb.secret
+    args:
+      chdir: secrets
+
+  - name: Create CA Cert ArangoDB
+    command: /tmp/arangodb3e-linux-3.8.1/bin/arangodb create tls ca
+    args:
+      chdir: secrets
+
+      
+  - name: Create SSL Keypair for Arangodb
+    command: /tmp/arangodb3e-linux-3.8.1/bin/arangodb create tls keyfile {{ tls_key_params }}
+    args:
+      chdir: secrets
+
+  - name: Set the 644 permission to the files created
+    file: 
+      path: "{{ item.path }}" 
+      mode: '0644'
+    loop:
+      - { path: "secrets/arangodb.secret"}
+      - { path: "secrets/tls-ca.key"}
+      - { path: "secrets/tls-ca.crt"}
+      - { path: "secrets/tls.keyfile"}
