@@ -7,11 +7,11 @@
   roles:
     - ansible/roles/arangodb-credentials-setup
 
-- hosts: all
+- hosts: agents
   roles:   
     - ansible/roles/arangodb
 
-- hosts: all
+- hosts: agents
   tasks:
     - name: Start the agent server
       ansible.builtin.systemd:
@@ -19,7 +19,7 @@
         state: started
       become: true
 
-- hosts: all
+- hosts: agents
   tasks:
     - name: Start the dbserver
       ansible.builtin.systemd:
@@ -27,7 +27,7 @@
         state: started
       become: true
 
-- hosts: all
+- hosts: agents
   tasks:
     - name: Start the coordinator server
       ansible.builtin.systemd:
