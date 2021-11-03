@@ -13,6 +13,7 @@ Restart=on-failure
 KillMode=process
 ExecStart=/usr/local/arangodb3e-linux-3.8.1/bin/arangodb \
     --starter.address={{ ansible_eth1.ipv4.address }} \
+    --starter.port=8527 \
     --starter.data-dir=/var/lib/arangodb3/dbserver \
     --starter.join={{ starter_join_ips }} \
     --auth.jwt-secret=/vagrant/secrets/arangodb.secret \
