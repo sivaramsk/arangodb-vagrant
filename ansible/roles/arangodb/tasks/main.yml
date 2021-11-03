@@ -57,5 +57,3 @@
     - { src: "config/systemdunits/coordinator.service", dest: "/etc/systemd/system/coordinator.service"}
     - { src: "config/systemdunits/dbserver.service", dest: "/etc/systemd/system/dbserver.service"}
   become: true
-  vars:
-    starter_join_ips: "192.168.0.20:8528,192.168.0.21:8528,192.168.0.22:8528"
