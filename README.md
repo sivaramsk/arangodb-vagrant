@@ -1,13 +1,12 @@
 # arangodb-vagrant
-Setup Arangodb cluster using vagrant in a minute. This project sets up arangodb in a cluster configuraiton using ArangoDB starter. This has been tested with Ubuntu 20.04, but the ansible modules used were generic, might work with centos as well. 
-
+Setup Arangodb cluster using vagrant in a minute. This project sets up arangodb in a cluster configuraiton using ArangoDB starter. 
 1. Checkout the project
 2. Edit the vagrant file with the right interface and correct ip in the below line 
    * __node.vm.network "public_network", ip: "192.168.0.#{20+machine_id}", bridge: "wlo1"__
    * Private interface(Host-only adapter) does not seem to work. Use public_network here and make sure the ip subnet matches your DHCP. 
 4. vagrant up
 
-### Configuration Options: (Not much of configuration option at this point)
+### Configuration Options: 
 __Take a look at the sample playbook.yml provided for configuring separate agents, dbservers and coordinator services__
   * arangodb_download_url - set this up for the arangodb version to be installed.
   * tls_key_params - have the host params for all the servers being used for installation. 
@@ -40,7 +39,7 @@ __Take a look at the sample playbook.yml provided for configuring separate agent
 192.168.0.28 ansible_user=vagrant
 ```
 
-Keep the 127.0.0.1 in the above as it is used to create credentials locally. Replace the ip's appropriately. 
+**Keep the 127.0.0.1 in the hosts.yaml as it is used to create credentials locally. Replace the other ip's appropriately**
 
 The ansible-role is generic and should work on all the linux versions, it has been primarily tested with ubuntu 20.04
 
