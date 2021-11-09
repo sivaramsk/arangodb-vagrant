@@ -9,7 +9,8 @@ Setup Arangodb cluster using vagrant in a minute. This project sets up arangodb 
 1. Checkout the project
 2. Edit the vagrant file with the right interface and correct ip in the below line 
    * __node.vm.network "public_network", ip: "192.168.0.#{20+machine_id}", bridge: "wlo1"__
-   * Private interface(Host-only adapter) does not seem to work. Use public_network here and make sure the ip subnet matches your DHCP. 
+     * Private interface(Host-only adapter) does not seem to work. Use public_network here and make sure the ip subnet matches your DHCP. 
+     * If you change the ip in the above configuration, make sure you change the ip values in the playbook.yaml and hosts.yaml.
 4. vagrant up
 
 ### Configuration Options: 
