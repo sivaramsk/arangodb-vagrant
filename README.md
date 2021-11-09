@@ -1,5 +1,5 @@
 # arangodb-vagrant
-Setup Arangodb cluster using vagrant in a minute
+Setup Arangodb cluster using vagrant in a minute. This project sets up arangodb in a cluster configuraiton using ArangoDB starter. This has been tested with Ubuntu 20.04, but the ansible modules used were generic, might work with centos as well. 
 
 1. Checkout the project
 2. Edit the vagrant file with the right interface and correct ip in the below line 
@@ -7,12 +7,19 @@ Setup Arangodb cluster using vagrant in a minute
    * Private interface(Host-only adapter) does not seem to work. Use public_network here and make sure the ip subnet matches your DHCP. 
 4. vagrant up
 
-The anible role can be independetly used without vagrant. 
+### Configuration Options: (Not much of configuration option at this point)
+__Take a look at the sample playbook.yml provided for configuring separate agents, dbservers and coordinator services__
+  * arangodb_download_url - set this up for the arangodb version to be installed.
+  * tls_key_params - have the host params for all the servers being used for installation. 
+  * starter_join_ips - agent ipaddress that will be passed to --starter.join option of arangodb starter. 
+
+
+### Using ansible role seperately
 1. Checkout the project.
 2. Edit the hosts.yaml file with the correct ip and groups.
 3. ansible-playbook -i hosts.yaml playbook.yaml
 
-Sample playbook.yaml
+### Sample playbook.yaml
 
 ```
 127.0.0.1 ansible_connection=local
