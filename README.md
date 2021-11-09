@@ -1,5 +1,11 @@
 # arangodb-vagrant
 Setup Arangodb cluster using vagrant in a minute. This project sets up arangodb in a cluster configuraiton using ArangoDB starter. 
+
+### Pre-requisites:
+1. Virtualbox 
+2. Vagrant
+
+### Install Instruction:
 1. Checkout the project
 2. Edit the vagrant file with the right interface and correct ip in the below line 
    * __node.vm.network "public_network", ip: "192.168.0.#{20+machine_id}", bridge: "wlo1"__
