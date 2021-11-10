@@ -26,7 +26,7 @@
 
 - name: Download and Install ArangoDB
   ansible.builtin.unarchive: 
-    src: https://download.arangodb.com/9c169fe900ff79790395784287bfa82f0dc0059375a34a2881b9b745c8efd42e/arangodb38/Enterprise/Linux/arangodb3e-linux-3.8.1.tar.gz
+    src: "{{ arangodb_download_url }}"
     dest: /usr/local
     remote_src: yes
   become: true
@@ -53,7 +53,7 @@
     dest: "{{ item.dest }}"
     mode: '644'
   loop:
-    - { src: "config/systemdunits/agent.service", dest: "/etc/systemd/system/agent.service"}
-    - { src: "config/systemdunits/coordinator.service", dest: "/etc/systemd/system/coordinator.service"}
-    - { src: "config/systemdunits/dbserver.service", dest: "/etc/systemd/system/dbserver.service"}
+    - { src: "templates/systemdunits/agent.service.j2", dest: "/etc/systemd/system/agent.service"}
+    - { src: "templates/systemdunits/coordinator.service.j2", dest: "/etc/systemd/system/coordinator.service"}
+    - { src: "templates/systemdunits/dbserver.service.j2", dest: "/etc/systemd/system/dbserver.service"}
   become: true
