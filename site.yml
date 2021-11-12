@@ -1,17 +1,12 @@
 ---
 - hosts: 127.0.0.1
-  vars:
-     arangodb_download_url: https://download.arangodb.com/9c169fe900ff79790395784287bfa82f0dc0059375a34a2881b9b745c8efd42e/arangodb38/Enterprise/Linux/arangodb3e-linux-3.8.1.tar.gz
-     tls_key_params: --host 192.168.0.20 --host 192.168.0.21 --host 192.168.0.22
   connection: local
   roles:
-    - ansible/roles/arangodb-credentials-setup
+    - arangodb-collection/roles/arangodb_credentials_setup
 
 - hosts: agents
-  vars:
-    starter_join_ips: "192.168.0.20:8528,192.168.0.21:8528,192.168.0.22:8528"
   roles:   
-    - ansible/roles/arangodb
+    - arangodb-collection/roles/arangodb_starter
 
 - hosts: agents
   tasks:

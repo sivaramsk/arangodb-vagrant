@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
 
   #Disabling the default /vagrant share
   config.vm.synced_folder ".", "/vagrant", disabled: false
-  MACHINE = ["arango1","arango2","arango3"]
+  MACHINE = ["arango0","arango1","arango2"]
   N = 2
 
   (0..N).each do |machine_id|
@@ -22,11 +22,11 @@ Vagrant.configure("2") do |config|
       if machine_id == N
         node.vm.provision :ansible do |ansible|
           ansible.limit = "all"
-          ansible.galaxy_roles_path = './ansible/roles'
-          ansible.inventory_path = 'hosts.yaml'
-          ansible.playbook = 'playbook.yml'
+          ansible.galaxy_roles_path = 'arangodb-collection/roles'
+          ansible.inventory_path = 'hosts'
+          ansible.playbook = 'site.yml'
         end
-      end    
+       end    
     end
   end
 end

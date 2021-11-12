@@ -7,25 +7,40 @@ Setup Arangodb cluster using vagrant in a minute. This project sets up arangodb 
 
 ### Install Instruction:
 1. Checkout the project
-2. Edit the vagrant file with the right interface and correct ip in the below line 
+2. Check out the arangodb-collection project from https://github.com/sivaramsk/arangodb-collection
+3. Edit the vagrant file with the right interface and correct ip in the below line 
    * __node.vm.network "public_network", ip: "192.168.0.#{20+machine_id}", bridge: "wlo1"__
      * Private interface(Host-only adapter) does not seem to work. Use public_network here and make sure the ip subnet matches your DHCP. 
      * If you change the ip in the above configuration, make sure you change the ip values in the playbook.yaml and hosts.yaml.
 4. vagrant up
 
-### Configuration Options: 
-__Take a look at the sample playbook.yml provided for configuring separate agents, dbservers and coordinator services__
-  * arangodb_download_url - set this up for the arangodb version to be installed.
-  * tls_key_params - have the host params for all the servers being used for installation. 
-  * starter_join_ips - agent ipaddress that will be passed to --starter.join option of arangodb starter. 
+### Configuration Options for arangodb_starter role: 
+__Take a look at the sample site.yml provided for configuring separate agents, dbservers and coordinator services__
+```
+---
+
+arangodb_version: "3.8.2"
+arangodb_authentication: false
+arangodb_username: "root"
+arangodb_password: ""
+arangodb_starter_port: 8528
+arangodb_agents:
+  - 192.168.0.20
+  - 192.168.0.21
+  - 192.168.0.22
+arangodb_servers: # DBServers and Coordinators IP to create TLS. Comment it out if are using only 3 nodes.
+  - 192.168.0.23
+  - 192.168.0.24
+  - 192.168.0.25
+  - 192.168.0.26
+  - 192.168.0.27
+  - 192.168.0.28
+  - 192.168.0.29
+```
 
 
-### Using ansible role seperately
-1. Checkout the project.
-2. Edit the hosts.yaml file with the correct ip and groups.
-3. ansible-playbook -i hosts.yaml playbook.yaml
 
-### Sample playbook.yaml
+### Sample hosts file for installing agents, dbserver and coordinators seperately. 
 
 ```
 127.0.0.1 ansible_connection=local
