@@ -28,7 +28,9 @@ arangodb_agents:
   - 192.168.0.20
   - 192.168.0.21
   - 192.168.0.22
-arangodb_servers: # DBServers and Coordinators IP to create TLS. Comment it out if are using only 3 nodes.
+# DBServers and Coordinators IP to create TLS, if you are using seperate nodes for dbservers and coordinators.
+# Refer: https://www.arangodb.com/docs/3.8/programs-starter-security.html#tls-server-certificates
+arangodb_servers: 
   - 192.168.0.23
   - 192.168.0.24
   - 192.168.0.25
