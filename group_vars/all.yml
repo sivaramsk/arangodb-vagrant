@@ -1,0 +1,19 @@
+---
+
+arangodb_version: "3.8.2"
+arangodb_authentication: false
+arangodb_username: "root"
+arangodb_password: ""
+arangodb_starter_port: 8528
+arangodb_agents:
+  - 192.168.0.20
+  - 192.168.0.21
+  - 192.168.0.22
+#arangodb_servers:
+  #- 192.168.0.23
+  #- 192.168.0.24
+  #- 192.168.0.25
+  #- 192.168.0.26
+  #- 192.168.0.27
+  #- 192.168.0.28
+  #- 192.168.0.29

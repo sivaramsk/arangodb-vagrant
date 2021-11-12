@@ -1,0 +1,33 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  roles:
+    - arangodb-collection/roles/arangodb_credentials_setup
+
+- hosts: agents
+  roles:   
+    - arangodb-collection/roles/arangodb_starter
+
+- hosts: agents
+  tasks:
+    - name: Start the agent server
+      ansible.builtin.systemd:
+        name: agent.service
+        state: started
+      become: true
+
+- hosts: agents
+  tasks:
+    - name: Start the dbserver
+      ansible.builtin.systemd:
+        name: dbserver.service
+        state: started
+      become: true
+
+- hosts: agents
+  tasks:
+    - name: Start the coordinator server
+      ansible.builtin.systemd:
+        name: coordinator.service
+        state: started
+      become: true
